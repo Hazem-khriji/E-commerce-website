@@ -10,7 +10,10 @@
 					<div class="intro-excerpt">
 						<h1>Home</h1>
 						<p class="mb-4">Discover elegant and affordable furniture to transform your home into a cozy haven.</p>
-						<p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+						<p>
+							<a href="{{ path('app_shop') }}" class="btn btn-secondary me-2">Shop Now</a>
+							<a href="{{ path('app_shop') }}" class="btn btn-white-outline">Explore</a>
+						</p>
 					</div>
 				</div>
 				<div class="col-lg-7">
@@ -96,68 +99,68 @@
 		</div>
 		<!-- End Product Section -->
 
-		<!-- Start Why Choose Us Section -->
-		<div class="why-choose-section">
-			<div class="container">
-				<div class="row justify-content-between">
-					<div class="col-lg-6">
-						<h2 class="section-title">Why Choose Us</h2>
-						<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+	<!-- Start Why Choose Us Section -->
+	<div class="why-choose-section">
+		<div class="container">
+			<div class="row justify-content-between align-items-center">
+				<div class="col-lg-6">
+					<h2 class="section-title">Why Choose Us</h2>
+					<p>At Furni, we combine quality craftsmanship, modern design, and affordable prices to bring comfort and style into every home.</p>
 
-						<div class="row my-5">
-							<div class="col-6 col-md-6">
-								<div class="feature">
-									<div class="icon">
-										<img src="{{ asset('images/truck.svg') }}" alt="Image" class="imf-fluid">
-									</div>
-									<h3>Fast &amp; Free Shipping</h3>
-									<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+					<div class="row my-5">
+						<div class="col-6 col-md-6">
+							<div class="feature">
+								<div class="icon">
+									<img src="{{ asset('images/truck.svg') }}" alt="Image" class="imf-fluid">
 								</div>
+								<h3>Fast &amp; Free Shipping</h3>
+								<p>Get your furniture delivered quickly and at no extra cost—right to your doorstep.</p>
 							</div>
-
-							<div class="col-6 col-md-6">
-								<div class="feature">
-									<div class="icon">
-										<img src="{{ asset('images/bag.svg') }}" alt="Image" class="imf-fluid">
-									</div>
-									<h3>Easy to Shop</h3>
-									<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-								</div>
-							</div>
-
-							<div class="col-6 col-md-6">
-								<div class="feature">
-									<div class="icon">
-										<img src="{{ asset('images/support.svg') }}" alt="Image" class="imf-fluid">
-									</div>
-									<h3>24/7 Support</h3>
-									<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-								</div>
-							</div>
-
-							<div class="col-6 col-md-6">
-								<div class="feature">
-									<div class="icon">
-										<img src="{{ asset('images/return.svg') }}" alt="Image" class="imf-fluid">
-									</div>
-									<h3>Hassle Free Returns</h3>
-									<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-								</div>
-							</div>
-
 						</div>
-					</div>
 
-					<div class="col-lg-5">
-						<div class="img-wrap">
-							<img src="{{ asset('images/why-choose-us-img.jpg') }}" alt="Image" class="img-fluid">
+						<div class="col-6 col-md-6">
+							<div class="feature">
+								<div class="icon">
+									<img src="{{ asset('images/bag.svg') }}" alt="Image" class="imf-fluid">
+								</div>
+								<h3>Easy to Shop</h3>
+								<p>Browse, choose, and order with just a few clicks—shopping made simple and stress-free.</p>
+							</div>
 						</div>
-					</div>
 
+						<div class="col-6 col-md-6">
+							<div class="feature">
+								<div class="icon">
+									<img src="{{ asset('images/support.svg') }}" alt="Image" class="imf-fluid">
+								</div>
+								<h3>24/7 Support</h3>
+								<p>Our team is here for you anytime, day or night, to answer your questions and help you out.</p>
+							</div>
+						</div>
+
+						<div class="col-6 col-md-6">
+							<div class="feature">
+								<div class="icon">
+									<img src="{{ asset('images/return.svg') }}" alt="Image" class="imf-fluid">
+								</div>
+								<h3>Hassle Free Returns</h3>
+								<p>Changed your mind? No worries—returns are easy and straightforward.</p>
+							</div>
+						</div>
+
+					</div>
 				</div>
+
+				<div class="col-lg-5">
+					<div class="img-wrap">
+						<img src="{{ asset('images/why-choose-us-img.jpg') }}" alt="Image" class="img-fluid">
+					</div>
+				</div>
+
 			</div>
 		</div>
-		<!-- End Why Choose Us Section -->
+	</div>
+	<!-- End Why Choose Us Section -->
 
 		<!-- Start We Help Section -->
 		<div class="we-help-section">
@@ -172,13 +175,13 @@
 					</div>
 					<div class="col-lg-5 ps-lg-5">
 						<h2 class="section-title mb-4">We Help You Make Modern Interior Design</h2>
-						<p>Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+						<p>Our furniture blends elegance and function to bring your vision of a modern home to life. Whether you're redesigning a room or starting fresh, we make it effortless to create spaces that reflect your style.</p>
 
 						<ul class="list-unstyled custom-list my-4">
-							<li>Donec vitae odio quis nisl dapibus malesuada</li>
-							<li>Donec vitae odio quis nisl dapibus malesuada</li>
-							<li>Donec vitae odio quis nisl dapibus malesuada</li>
-							<li>Donec vitae odio quis nisl dapibus malesuada</li>
+							<li>Minimalist Aesthetics</li>
+							<li>Smart Functionality</li>
+							<li>Timeless Comfort</li>
+							<li>Quality Craftsmanship</li>
 						</ul>
 						<p><a href="{{ path('app_shop')}}" class="btn">Explore</a></p>
 					</div>
