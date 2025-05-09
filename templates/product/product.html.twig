@@ -7,7 +7,7 @@
         <div class="row">
             <!-- Product Images -->
             <div class="col-md-6 mb-4">
-                <img src="{{ asset('images/product-1.png') }}" alt="Product" class="img-fluid rounded mb-3" style="max-height: 400px;
+                <img src="{{ asset('images/' ~product.getImageUrl()) }}" alt="Product" class="img-fluid rounded mb-3" style="max-height: 400px;
                 object-fit: cover;" id="mainImage">
 {#                <div class="d-flex justify-content-between">#}
 {#                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Thumbnail 1" class="rounded active" onclick="changeImage(event, this.src)" style="width: 80px;#}
@@ -39,11 +39,11 @@
 
             <!-- Product Details -->
             <div class="col-md-6">
-                <h2 class="mb-3">Premium Wireless Headphones</h2>
+                <h2 class="mb-3">{{ product.name }}</h2>
                 <p class="text-muted mb-4">SKU: WH1000XM4</p>
                 <div class="mb-3">
-                    <span class="h4 me-2">$349.99</span>
-                    <span class="text-muted"><s>$399.99</s></span>
+                    <span class="h4 me-2">{{ product.price }} $</span>
+                    <span class="text-muted"><s>{{ product.price * 4/3}} $</s></span>
                 </div>
                 <div class="mb-3">
                     <i class="bi bi-star-fill text-warning"></i>
@@ -53,8 +53,7 @@
                     <i class="bi bi-star-half text-warning"></i>
                     <span class="ms-2">4.5 (120 reviews)</span>
                 </div>
-                <p class="mb-4">Experience premium sound quality and industry-leading noise cancellation with these wireless
-                    headphones. Perfect for music lovers and frequent travelers.</p>
+                <p class="mb-4">{{ product.description }}</p>
 {#         This is for != colors for the product       #}
 {#                <div class="mb-4">#}
 {#                    <h5>Color:</h5>#}
