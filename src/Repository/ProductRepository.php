@@ -24,7 +24,7 @@ class ProductRepository extends ServiceEntityRepository
         $qb->select('p');
 
         if ($query) {
-            $qb->andWhere('p.name LIKE :query')
+            $qb->andWhere('p.name LIKE :query or p.description LIKE :query or p.category LIKE :query')
                 ->setParameter('query', '%' . $query . '%');
         }
 
