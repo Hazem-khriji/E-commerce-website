@@ -1,0 +1,69 @@
+/* sidebar.css */
+
+/* Sidebar Styles */
+.sidebar-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 250px; /* Adjust the width of the sidebar */
+    padding: 20px;
+    background-color: #f8f9fa;
+    z-index: 999;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.sidebar {
+    position: relative;
+    padding-top: 20px;
+    padding-left: 0;
+}
+
+.sidebar h4 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.sidebar .filter-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .filter-category ul li {
+    margin: 5px 0;
+}
+
+.sidebar .filter-category ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.sidebar .filter-price input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.sidebar .filter-price button {
+    width: 100%;
+}
+
+/* Content area */
+.product-section {
+    /*margin-left: 260px; */
+    padding-top: 20px;
+}
+
+/* Optional - To make the layout responsive */
+@media (max-width: 767px) {
+    .sidebar-container {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+    .product-section {
+        margin-left: 0;
+    }
+}

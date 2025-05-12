@@ -40,24 +40,71 @@
 	<!-- End Hero Section -->
 
 	<div class="untree_co-section product-section before-footer-section">
-		<div class="container">
+		<div class="container" style="margin-left: 5%">
 			<div class="row">
-				{% if products| length > 0 %}
-					{% for product in products %}
-						<div class="col-12 col-md-4 col-lg-3 mb-5">
-							<a class="product-item" href="{{ path('app_product', {'id': product.id}) }}">
-								<img src="{{ asset('images/' ~ product.imageUrl) }}" class="img-fluid product-thumbnail">
-								<h3 class="product-title">{{ product.name }}</h3>
-								<strong class="product-price">$ {{ product.price }}</strong>
-								<span class="icon-cross">
-                                    <img src="{{ asset('images/cross.svg') }}" class="img-fluid">
-                                </span>
-							</a>
-						</div>
-					{% endfor %}
-				{% else %}
-					<p>No products available.</p>
-				{% endif %}
+
+				<!-- Start Sidebar Section inside nav -->
+				<nav class="col-12 col-md-3 mb-5 sidebar">
+
+						<h4>Filter Products</h4>
+						<!-- Category Filter -->
+					<div class="filter-category mb-4">
+						<h5>Category</h5>
+						<form method="get" action="{{ path('app_shop') }}">
+							<!-- Hidden input to retain the search query -->
+							<input type="hidden" name="query" value="{{ app.request.query.get('query') }}">
+
+							<select class="form-select" name="category" onchange="this.form.submit()">
+								<option value="">Select Category</option>
+								{% for category, subcategories in categories %}
+									<optgroup label="{{ category }}">
+										{% for subCategoryKey, subCategoryValue in subcategories %}
+											<option value="{{ subCategoryKey }}"
+													{% if subCategoryKey == selectedCategory %} selected {% endif %}>
+												{{ subCategoryValue }}
+											</option>
+										{% endfor %}
+									</optgroup>
+								{% endfor %}
+							</select>
+						</form>
+					</div>
+
+
+					<!-- Price Range Filter -->
+					<div class="filter-price mb-4">
+						<h5>Price Range</h5>
+						<form method="get" action="{{ path('app_shop') }}">
+							<input type="hidden" name="category" value="{{ app.request.query.get('category') }}">
+							<input type="number" name="min_price" class="form-control mb-2" placeholder="Min Price" value="{{ app.request.query.get('min_price') }}">
+							<input type="number" name="max_price" class="form-control mb-2" placeholder="Max Price" value="{{ app.request.query.get('max_price') }}">
+							<input type="hidden" name="query" value="{{ app.request.query.get('query') }}">
+							<button type="submit" class="btn btn-primary w-100">Apply</button>
+						</form>
+					</div>
+
+				</nav>
+				<!-- End Sidebar Section -->
+
+				<!-- Start Products Section inside main -->
+				<main class="col-12 col-md-9">
+					<div class="row">
+						{% if products|length > 0 %}
+							{% for product in products %}
+								<div class="col-12 col-md-4 col-lg-3 mb-5">
+									<a class="product-item" href="{{ path('app_product', {'id': product.id}) }}">
+										<img src="{{ asset('images/' ~ product.imageUrl) }}" class="img-fluid product-thumbnail">
+										<h3 class="product-title">{{ product.name }}</h3>
+										<strong class="product-price">$ {{ product.price }}</strong>
+									</a>
+								</div>
+							{% endfor %}
+						{% else %}
+							<p>No products available.</p>
+						{% endif %}
+					</div>
+				</main>
+				<!-- End Products Section -->
 			</div>
 		</div>
 	</div>
