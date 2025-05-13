@@ -13,25 +13,29 @@ class OrderItem
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?float $price = null;
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Product $product = null;
 
     #[ORM\Column]
     private ?int $quantity = null;
+
+    #[ORM\ManyToOne(inversedBy: 'items')]
+    private ?Cart $cart = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPrice(): ?float
+    public function getProduct(): ?Product
     {
-        return $this->price;
+        return $this->product;
     }
 
-    public function setPrice(float $price): static
+    public function setProduct(?Product $product): static
     {
-        $this->price = $price;
+        $this->product = $product;
 
         return $this;
     }
@@ -44,6 +48,18 @@ class OrderItem
     public function setQuantity(int $quantity): static
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getCart(): ?Cart
+    {
+        return $this->cart;
+    }
+
+    public function setCart(?Cart $cart): static
+    {
+        $this->cart = $cart;
 
         return $this;
     }

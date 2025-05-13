@@ -66,17 +66,29 @@
 {#                        <label class="btn btn-outline-primary" for="blue">Blue</label>#}
 {#                    </div>#}
 {#                </div>#}
-                    <div class="mb-4" style="display: flex; align-items: center; justify-content: start; gap:80px;">
-                    <div><label for="quantity" class="form-label">Quantity:</label>
-                        <input type="number" class="form-control" id="quantity" value="1" min="1" style="width: 80px;">
-                    </div>
+{#                    <div class="mb-4" style="display: flex; align-items: center; justify-content: start; gap:80px;">#}
+{#                    <div><label for="quantity" class="form-label">Quantity:</label>#}
+{#                        <input type="number" class="form-control" id="quantity" value="1" min="1" style="width: 80px;">#}
+{#                    </div>#}
+{#                        <a href={{ path('add_cart', {id: product.id}) }}>#}
+{#                            <button class="btn btn-primary btn-lg me-2">#}
+{#                                <i class="bi bi-cart-plus"></i> Add to Cart#}
+{#                            </button>#}
+{#                        </a>#}
 
-                    <button class="btn btn-primary btn-lg me-2">
+{#                </div>#}
+                <form action="{{ path('add_cart', {id: product.id}) }}" method="POST" style="display: flex; align-items: center; gap: 80px;">
+                    <div>
+                        <label for="quantity" class="form-label">Quantity:</label>
+                        <input type="number" class="form-control" name="quantity" id="quantity" value="1" min="1" style="width: 80px;">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg me-2">
                         <i class="bi bi-cart-plus"></i> Add to Cart
                     </button>
-                </div>
+                </form>
 
-{#       Ken 3andek wa9t fel sif zid wishlist         #}
+
+                {#       Ken 3andek wa9t fel sif zid wishlist         #}
 {#                <button class="btn btn-outline-secondary btn-lg mb-3">#}
 {#                    <i class="bi bi-heart"></i> Add to Wishlist#}
 {#                </button>#}

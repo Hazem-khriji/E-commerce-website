@@ -31,6 +31,12 @@ class Product
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $category = null;
 
+
+    public function __construct()
+    {
+
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,4 +113,5 @@ class Product
 
         return $this;
     }
+
 }
