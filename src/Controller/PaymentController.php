@@ -38,7 +38,7 @@ final class PaymentController extends AbstractController
             ];
         }
 
-        $stripe = new \Stripe\StripeClient('sk_test_51RTgFu2Yk8grX7e5ESieIU38amAchEIgLhLeGhkNX2Wli9fmvcpCrp2BjliSbCmEAm8RqAzNzxp7XxIGRfiiINMK006cAyIUpH');
+        $stripe = new \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
         $checkout_session = $stripe->checkout->sessions->create([
             'line_items' => $lineItems,
             'mode' => 'payment',
