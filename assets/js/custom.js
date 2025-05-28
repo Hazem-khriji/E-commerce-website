@@ -23,7 +23,7 @@
 	};
 	tinyslider();
 
-	
+
 
 
 	var sitePlusMinus = function() {
@@ -63,9 +63,9 @@
 
 	        quantityAmount.value = value;
 	    }
-	    
+
 	    init();
-		
+
 	};
 	sitePlusMinus();
 

@@ -12,6 +12,15 @@ final class ThankYouController extends AbstractController
     public function index(): Response
     {
         return $this->render('thankyou/thankyou.html.twig', [
+            'successful' => true,
+            'controller_name' => 'ThankYouController',
+        ]);
+    }
+    #[Route('/cancel', name: 'app_cancel')]
+    public function cancel(): Response
+    {
+        return $this->render('thankyou/thankyou.html.twig', [
+            'successful' => false,
             'controller_name' => 'ThankYouController',
         ]);
     }
