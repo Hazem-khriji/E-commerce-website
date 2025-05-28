@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Services\CartService;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -21,8 +23,12 @@ final class PaymentController extends AbstractController
     #[Route('/checkout', name: 'app_checkout')]
     public function checkout(CartService $cartService): Response
     {
+        // Set your Stripe secret key (make sure it's loaded in your env variables)
+        Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
+
         $items = $cartService->getCartWithData();
         $lineItems = [];
+
         foreach ($items as $item) {
             $product = $item['product'];
             $lineItems[] = [
@@ -38,14 +44,15 @@ final class PaymentController extends AbstractController
             ];
         }
 
-        $stripe = new \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
-        $checkout_session = $stripe->checkout->sessions->create([
+        $checkoutSession = Session::create([
+            'payment_method_types' => ['card'],
             'line_items' => $lineItems,
             'mode' => 'payment',
             'success_url' => $this->generateUrl('app_thank_you', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'cancel_url' => $this->generateUrl('app_cancel', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
 
-        return $this->redirect($checkout_session->url, 303);
+        return $this->redirect($checkoutSession->url, 303);
     }
 }
+
