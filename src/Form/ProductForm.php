@@ -17,6 +17,7 @@ class ProductForm extends AbstractType
             ->add('description')
             ->add('imageUrl')
             ->add('stock')
+            ->add('category')
         ;
     }
 

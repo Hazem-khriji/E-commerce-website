@@ -17,7 +17,7 @@
 
     <title>
         {% block title %}
-        E-commerce website for selling furniture
+            E-commerce website for selling furniture
         {% endblock %}
     </title>
 </head>
@@ -58,8 +58,9 @@
             </ul>
 
             <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                <li><a class="nav-link" href="#"><img src="{{ asset('images/user.svg') }}" alt=""></a></li>
-                <li><a class="nav-link" href="{{ path('app_cart') }}"><img src="{{ asset('images/cart.svg') }}" alt=""></a></li>
+                <li><a class="nav-link" href="{{ path('app_logout') }}"><img src="{{ asset('images/exit.png') }}" alt="" style="width: 25px; height: 25px;"> </a></li>
+                <li></li>
+                <li><a class="nav-link" href="{{ path('app_cart') }}"><img src="{{ asset('images/cart.svg') }}" alt=""> </a></li>
             </ul>
         </div>
     </div>
@@ -68,8 +69,10 @@
 
 {% block body %}
 {% endblock %}
+
 <!-- Start Footer Section -->
 <footer class="footer-section">
+
     <div class="container relative">
 
         <div class="sofa-img mt-5">
@@ -155,6 +158,44 @@
 </footer>
 <!-- End Footer Section -->
 
+<!-- Chatbot Widget -->
+<div class="chatbot-widget">
+    <div class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-comments"></i>
+    </div>
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h5>Furni Assistant</h5>
+            <button class="chatbot-close" id="chatbotClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    Hello! I'm your Furni assistant. How can I help you with your furniture needs today?
+                </div>
+            </div>
+            <div class="message bot-message">
+                <div class="message-content">
+                    I can suggest products, answer questions about furniture styles, or help you find what you're looking for.
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Type your question here...">
+            <button id="chatbotSend">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+        <div class="chatbot-suggestions">
+            <button class="suggestion-chip">Classic living room ideas</button>
+            <button class="suggestion-chip">Our warranty policy</button>
+            <button class="suggestion-chip">Our material</button>
+            <button class="suggestion-chip">Ergonomic chairs</button>
+        </div>
+    </div>
+</div>
 
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/tiny-slider.js') }}"></script>

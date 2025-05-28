@@ -31,13 +31,52 @@ class ProductRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Product
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+//    public function findBySearch(string $term): array
+//    {
+//        $term = trim(mb_strtolower($term));
+//
+//        return $this->createQueryBuilder('p')
+//            ->where('LOWER(p.name) LIKE :term OR LOWER(p.description) LIKE :term OR LOWER(p.category) LIKE :term')
+//            ->setParameter('term', '%' . $term . '%')
+//            ->getQuery()
+//            ->getResult();
+//    }
+    public function filterProducts($search, $category, $minPrice, $maxPrice): array
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        if ($search) {
+            $search = trim(mb_strtolower($search));
+            $qb->andWhere('LOWER(p.name) LIKE :search OR LOWER(p.description) LIKE :search OR LOWER(p.category) LIKE :search')
+                ->setParameter('search', '%' . $search . '%');
+        }
+
+        if ($category) {
+            $qb->andWhere('p.category = :category')
+                ->setParameter('category', $category);
+        }
+
+        if ($minPrice) {
+            $qb->andWhere('p.price >= :minPrice')
+                ->setParameter('minPrice', $minPrice);
+        }
+
+        if ($maxPrice) {
+            $qb->andWhere('p.price <= :maxPrice')
+                ->setParameter('maxPrice', $maxPrice);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+    public function findDistinctCategories(): array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('DISTINCT p.category')
+            ->orderBy('p.category', 'ASC');
+
+        return array_column($qb->getQuery()->getArrayResult(), 'category');
+    }
+
+
+
 }

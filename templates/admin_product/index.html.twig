@@ -1,5 +1,4 @@
-{% extends 'base.html.twig' %}
-{% set current_page = 'home' %}
+{% extends 'temp.html.twig' %}
 {% block title %}Product index{% endblock %}
 
 {% block body %}
@@ -12,6 +11,7 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Description</th>
+                <th>Category</th>
                 <th>ImageUrl</th>
                 <th>Stock</th>
                 <th>actions</th>
@@ -24,6 +24,7 @@
                 <td>{{ product.name }}</td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.description }}</td>
+                <td>{{ product.category }}</td>
                 <td>{{ product.imageUrl }}</td>
                 <td>{{ product.stock }}</td>
                 <td>
@@ -39,5 +40,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_product_new') }}">Create new</a>
+    <div class="d-flex gap-2">
+        <a href="{{ path('app_admin_product_new') }}" class="btn btn-primary">Create New</a>
+        <a href="{{ path('app_home') }}" class="btn btn-secondary">Homepage</a>
+    </div>
+
 {% endblock %}
