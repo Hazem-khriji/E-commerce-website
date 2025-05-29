@@ -4,8 +4,13 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use DateTimeImmutable;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[Vich\Uploadable]
 class Product
 {
     #[ORM\Id]
@@ -22,14 +27,26 @@ class Product
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255 , nullable: true)]
     private ?string $imageUrl = null;
+
+    #[Vich\UploadableField(mapping: 'product_images', fileNameProperty: 'imageUrl')]
+    #[Assert\File(
+        maxSize: '5M', // Max file size: 5 Megabytes (adjust as needed)
+        mimeTypes: ['image/jpeg', 'image/png'], // Allowed MIME types
+        mimeTypesMessage: 'Please upload a valid JPG or PNG image.'
+    )]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column]
     private ?int $stock = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $category = null;
+
 
     public function getId(): ?int
     {
@@ -105,6 +122,30 @@ class Product
     {
         $this->category = $category;
 
+        return $this;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+        if (null !== $imageFile) {
+            $this->updatedAt = new DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 }
