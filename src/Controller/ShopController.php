@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ProductRepository;
+use App\Service\RequestHandlerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,41 +12,23 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class ShopController extends AbstractController
 {
-    #[Route('/shop', name: 'app_shop'),IsGranted("ROLE_USER")]
-//    public function index(Request $request,ProductRepository $productRepository): Response
-//    {
-//        $searchTerm = $request->query->get('search');
-//
-//        $products = $searchTerm
-//            ? $productRepository->findBySearch($searchTerm) // custom method
-//            : $productRepository->findAll();
-//
-//        return $this->render('shop/shop.html.twig', [
-//            'products' => $products,
-//            'searchTerm' => $searchTerm,
-//        ]);
-//    }
-    public function index(Request $request, ProductRepository $productRepository): Response
+    #[Route('/shop/{page?1}/{nbre?12}', name: 'app_shop'),IsGranted("ROLE_USER")]
+    public function index(Request $request, ProductRepository $productRepository,int $page,
+                          int $nbre,RequestHandlerService $handlerService): Response
     {
-        $search = $request->query->get('search');
-        $category = $request->query->get('category');
-        $minPrice = $request->query->get('min_price');
-        $maxPrice = $request->query->get('max_price');
+        $result = $handlerService->handleRequest($request->query,$page,$nbre);
 
-        $products = $productRepository->filterProducts($search, $category, $minPrice, $maxPrice);
-
-        // Extract distinct categories from products for the filter menu
         $allCategories = $productRepository->findDistinctCategories();
 
         return $this->render('shop/shop.html.twig', [
-            'products' => $products,
+            'products' => $result['products'],
             'categories' => $allCategories,
-            'filters' => [
-                'search' => $search,
-                'category' => $category,
-                'min_price' => $minPrice,
-                'max_price' => $maxPrice,
-            ],
+            'filters' => $result['filters'],
+            'page' => $page,
+            'nbre' => $nbre,
+            'isPaginated'=>true,
+            "nbPages" => $result['nbPages'],
         ]);
     }
+
 }

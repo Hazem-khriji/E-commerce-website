@@ -16,32 +16,7 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    //    /**
-    //     * @return Product[] Returns an array of Product objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-//    public function findBySearch(string $term): array
-//    {
-//        $term = trim(mb_strtolower($term));
-//
-//        return $this->createQueryBuilder('p')
-//            ->where('LOWER(p.name) LIKE :term OR LOWER(p.description) LIKE :term OR LOWER(p.category) LIKE :term')
-//            ->setParameter('term', '%' . $term . '%')
-//            ->getQuery()
-//            ->getResult();
-//    }
-    public function filterProducts($search, $category, $minPrice, $maxPrice): array
+    public function filterProducts($search, $category, $minPrice, $maxPrice,$limit,$offset): array
     {
         $qb = $this->createQueryBuilder('p');
 
@@ -66,7 +41,18 @@ class ProductRepository extends ServiceEntityRepository
                 ->setParameter('maxPrice', $maxPrice);
         }
 
-        return $qb->getQuery()->getResult();
+        $countQb = clone $qb;
+        $count = (int) $countQb->select('COUNT(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $products = $qb
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+
+        return ['products' => $products, 'total' => $count];
     }
     public function findDistinctCategories(): array
     {
@@ -79,4 +65,28 @@ class ProductRepository extends ServiceEntityRepository
 
 
 
+    //    /**
+    //     * @return Product[] Returns an array of Product objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('p.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Product
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

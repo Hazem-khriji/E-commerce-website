@@ -86,5 +86,27 @@
 				{% endif %}
 			</div>
 		</div>
+		{% if isPaginated %}
+			<div class="row mt-2">
+				<nav aria-label="col Page navigation example">
+					<ul class="pagination justify-content-center ">
+						{% if page!=1 %}
+							<li class="page-item"><a class="page-link" href="{{ path("app_shop",{'page':page-1,'nbre':nbre}) }}">Previous</a></li>
+						{% else %}
+							<li class="page-item"><a class="page-link" href="{{ path("app_shop",{'page':page,'nbre':nbre}) }}">Previous</a></li>
+						{% endif %}
+						{% for i in range(1,nbPages) %}
+							<li class="page-item"><a class="page-link" href="{{ path("app_shop",{'page':i,'nbre':nbre}) }}">{{ i }}</a></li>
+						{% endfor %}
+						{% if page != nbPages  %}
+							<li class="page-item"><a class="page-link" href="{{ path("app_shop",{'page':page+1,'nbre':nbre}) }}">Next</a></li>
+						{% else  %}
+							<li class="page-item"><a class="page-link" href="{{ path("app_shop",{'page':page,'nbre':nbre}) }}">Next</a></li>
+						{% endif %}
+					</ul>
+				</nav>
+			</div>
+
+		{% endif %}
 	</div>
 {% endblock %}
